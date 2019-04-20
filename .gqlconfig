@@ -1,5 +1,6 @@
 {
   "schema": {
-    "files": "**/*.gql"
-  }
+    "files": "./schema.gql"
+  },
+   "graphqlForVSCode.nodePath": "ui/node_modules"
 }

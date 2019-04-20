@@ -72,7 +72,7 @@ class TokenManager {
     const token = this.getTokenObject();
 
     if (token) {
-      if (token.authTokenExpiration > new Date()) {
+      if (new Date(token.authTokenExpiration) > new Date()) {
         return true;
       }
     }
@@ -83,7 +83,7 @@ class TokenManager {
   hasFutureValidToken (): boolean {
     const token = this.getTokenObject();
 
-    if (token && (token.refreshTokenExpiration > new Date())) {
+    if (token && (new Date(token.refreshTokenExpiration) > new Date())) {
       return true;
     }
 
@@ -98,7 +98,7 @@ class TokenManager {
     const clientIdentifier = this.getClientIdentifier();
     const { refreshToken } = this.getTokenObject();
 
-    const result = await client.mutate<TokenObject, RefreshArgument>({
+    const result = await client.mutate<{ refresh: TokenObject }, RefreshArgument>({
       mutation: this.refresh$,
       variables: {
         clientIdentifier,
@@ -107,7 +107,7 @@ class TokenManager {
     });
 
     if (result.data) {
-      this.setTokenObject(result.data);
+      this.setTokenObject(result.data.refresh);
     }
   }
 
@@ -115,8 +115,10 @@ class TokenManager {
     username: string,
     password: string
   ) {
+    console.log('hererererererere');
     const clientIdentifier = this.getClientIdentifier();
-    const result = await client.mutate<TokenObject, LoginArgument>({
+    console.log('hererererererere');
+    const result = await client.mutate<{ login: TokenObject }, LoginArgument>({
       mutation: this.login$,
       variables: {
         username,
@@ -124,9 +126,9 @@ class TokenManager {
         clientIdentifier
       }
     });
-    
+    console.log(result);    
     if (result.data) {
-      this.setTokenObject(result.data);
+      this.setTokenObject(result.data.login);
     }
   }
 }

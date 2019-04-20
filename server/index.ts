@@ -8,6 +8,7 @@ import 'reflect-metadata';
 import { buildSchema, useContainer as gqlUseContainer } from 'type-graphql';
 import Container from 'typedi';
 import { createConnection, useContainer as ormUseContainer } from 'typeorm';
+import './logger';
 import { context } from './middlewares/auth-context';
 import { AuthResolver } from './resolvers/auth.resolver';
 

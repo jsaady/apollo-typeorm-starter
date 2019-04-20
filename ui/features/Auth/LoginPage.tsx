@@ -1,8 +1,9 @@
 import React from "react";
+import { RouteChildrenProps } from 'react-router';
 import { tokenManager } from "../../lib/Token";
 import { LoginForm } from "./LoginForm";
 
-export class LoginPage extends React.Component {
+export class LoginPage extends React.Component<RouteChildrenProps> {
   state = {
     email: '',
     password: ''
@@ -10,7 +11,11 @@ export class LoginPage extends React.Component {
   
   handleSubmit() {
     return () => {
-      tokenManager.login(this.state.email, this.state.password);
+      console.log('herererererere');
+      tokenManager.login(this.state.email, this.state.password).then(() => {
+        this.props.history.push('/home');
+        console.log(this);
+      });
     };
   }
 

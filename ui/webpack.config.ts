@@ -8,7 +8,9 @@ const path = join(__dirname, '..', '/assets');
 const config: Configuration = {
   entry: "./index.tsx",
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
+    chunkFilename: "[name].js",
+    publicPath: '/',
     path
   },
   mode: 'development',

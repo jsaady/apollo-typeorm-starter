@@ -1,12 +1,15 @@
 [{
-   "type": "postgres",
+   "type": "mysql",
    "host": "localhost",
-   "port": 5432,
-   "username": "dev",
-   "password": "dev",
+   "port": 3306,
+   "username": "root",
+   "password": "p4ssw0rd",
    "database": "dev",
    "synchronize": true,
    "logging": false,
+   "extra": {
+      "insecureAuth": true
+   },
    "entities": [
       "./entities/**/*.entity.ts"
    ],

@@ -1,9 +1,9 @@
 import React from "react";
 import { Route } from "react-router";
-import { LoginPage } from "./LoginPage";
+import { HomePage } from './HomePage';
 
 export default () => (
   <Route>
-    <Route path="/auth/login" component={LoginPage}></Route>
+    <Route path="/home" component={HomePage}></Route>
   </Route>
 );
