@@ -33,5 +33,9 @@
   },
   "devDependencies": {
     "sass": "^1.20.1"
+  },
+  "alias": {
+    "type-graphql": "type-graphql/browser-shim",
+    "type-graphql/*": "type-graphql/browser-shim"
   }
 }
