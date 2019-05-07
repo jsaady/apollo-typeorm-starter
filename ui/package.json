@@ -4,38 +4,38 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "node -r ts-node/register ../node_modules/webpack-cli/bin/cli.js",
-    "watch": "node -r ts-node/register ../node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "build": "parcel ./index.html",
+    "watch": "nodemon -e yarn build",
+    "do-ts": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' node -r ts-node/register"
   },
   "dependencies": {
     "@material-ui/core": "^3.8.1",
     "@playlyfe/gql": "^2.6.1",
-    "@types/html-webpack-plugin": "^3.2.0",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/react-router": "^4.4.3",
     "@types/react-router-dom": "^4.3.1",
-    "@types/webpack": "^4.4.22",
-    "@types/webpack-dev-server": "^3.1.1",
     "apollo-boost": "^0.1.23",
     "class-transformer": "^0.2.0",
     "cross-env": "^5.2.0",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
+    "parcel-bundler": "^1.12.3",
     "react": "^16.7.0",
     "react-apollo": "^2.3.3",
     "react-dom": "^16.7.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "source-map-loader": "^0.2.4",
+    "rxjs": "^6.5.1",
     "ts-loader": "^5.3.3",
     "ts-node": "^7.0.1",
-    "typescript": "next",
-    "webpack": "^4.28.3",
-    "webpack-cli": "^3.2.0",
-    "webpack-dev-server": "^3.1.14"
+    "typescript": "^3.4.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "sass": "^1.20.1"
+  },
+  "alias": {
+    "type-graphql": "type-graphql/browser-shim",
+    "type-graphql/*": "type-graphql/browser-shim"
+  }
 }

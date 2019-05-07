@@ -1,6 +1,7 @@
 import { plainToClass } from "class-transformer";
 import gql from "graphql-tag";
 import { LoginArgument } from "../../common/arguments/login.argument";
+import { LogoutArgument } from '../../common/arguments/logout.argument';
 import { RefreshArgument } from "../../common/arguments/refresh.argument";
 import { TokenObject } from "../../common/objects/Token.object";
 import { client } from "./GraphQL";
@@ -14,7 +15,7 @@ class TokenManager {
   refreshPromise: Promise<void>;
 
   private login$ = gql`
-    mutation Login($username: String!, $password: String!, $clientIdentifier: String!) {
+    mutation DoLogin($username: String!, $password: String!, $clientIdentifier: String!) {
       login(username: $username, password: $password, clientIdentifier: $clientIdentifier) {
         refreshToken
         refreshTokenExpiration
@@ -25,13 +26,19 @@ class TokenManager {
   `;
 
   private refresh$ = gql`
-    mutation Refresh($refreshToken: String!, $clientIdentifier: String!) {
+    mutation DoRefresh($refreshToken: String!, $clientIdentifier: String!) {
       refresh(refreshToken: $refreshToken, clientIdentifier: $clientIdentifier) {
         refreshToken
         refreshTokenExpiration
         authToken
         authTokenExpiration
       }
+    }
+  `;
+
+  private logout$ = gql`
+    mutation DoLogout($clientIdentifier: String!) {
+      logout(clientIdentifier: $clientIdentifier)
     }
   `;
 
@@ -115,9 +122,8 @@ class TokenManager {
     username: string,
     password: string
   ) {
-    console.log('hererererererere');
     const clientIdentifier = this.getClientIdentifier();
-    console.log('hererererererere');
+
     const result = await client.mutate<{ login: TokenObject }, LoginArgument>({
       mutation: this.login$,
       variables: {
@@ -126,9 +132,26 @@ class TokenManager {
         clientIdentifier
       }
     });
-    console.log(result);    
+
     if (result.data) {
       this.setTokenObject(result.data.login);
+    }
+  }
+
+  async logout () {
+    try {
+      const clientIdentifier = this.getClientIdentifier();
+
+      await client.mutate<void, LogoutArgument>({
+        mutation: this.logout$,
+        variables: {
+          clientIdentifier
+        }
+      });
+
+      this.setTokenObject(null);
+    } catch(e) {
+      console.error(e);
     }
   }
 }
