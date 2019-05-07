@@ -2,10 +2,10 @@
    "type": "mysql",
    "host": "localhost",
    "port": 3306,
-   "username": "root",
-   "password": "p4ssw0rd",
+   "username": "dev",
+   "password": "6AsHX9u&$@9YX3jq",
    "database": "dev",
-   "synchronize": true,
+   "synchronize": false,
    "logging": false,
    "extra": {
       "insecureAuth": true

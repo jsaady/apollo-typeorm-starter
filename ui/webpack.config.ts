@@ -30,7 +30,7 @@ const config: Configuration = {
         test: /\.tsx?$/,
         loader: "ts-loader",
         options: {
-          configFile: 'tsconfig.app.json'
+          configFile: 'tsconfig.json'
         }
       },
       // Avoid "require is not defined" errors
