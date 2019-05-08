@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core';
 import React from 'react';
 import { AppHeader } from '../../core/components/AppHeader';
 import { StateSetter, withMapState } from '../../lib/SimpleState';
+import { tokenManager } from '../../lib/Token';
 import { HomeState } from './HomeState';
 
 interface HomePageProps {
@@ -11,9 +12,10 @@ interface HomePageProps {
 
 const HomePageComponent: React.FunctionComponent<HomePageProps> = ({ message, set }: HomePageProps) => (<div>
   <AppHeader></AppHeader>
-  <Button onClick={() => {
-    const newMessage = message.includes('hello') ? 'goodbye' : 'hello';
-    set('message', newMessage);
+  <Button onClick={async () => {
+    const result = await tokenManager.trySomething();
+
+    set('message', result[0]);
   }}>Toggle</Button>
   {message}
 </div>);

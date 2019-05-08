@@ -1,12 +1,12 @@
-import { Args, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { LoginArgument } from "../../common/arguments/login.argument";
 import { LogoutArgument } from "../../common/arguments/logout.argument";
 import { RefreshArgument } from "../../common/arguments/refresh.argument";
+import { LoginErrors } from "../../common/enums/LoginErrors.enum";
+import { RefreshTokenErrors } from "../../common/enums/RefreshTokenErrors.enum";
+import { SignupErrors } from "../../common/enums/SignupErrors.enum";
 import { TokenObject } from "../../common/objects/Token.object";
 import { User } from "../entities/User.entity";
-import { LoginErrors } from "../enums/LoginErrors.enum";
-import { RefreshTokenErrors } from "../enums/RefreshTokenErrors.enum";
-import { SignupErrors } from "../enums/SignupErrors.enum";
 import { AuthTokenService } from "../services/AuthToken.service";
 import { RefreshTokenService } from "../services/RefreshToken.service";
 
@@ -82,7 +82,8 @@ export class AuthResolver {
   }
 
   @Query(returns => [String])
+  @Authorized(['asdfasdfasdf'])
   something () {
-    return [''];
+    return ['Authorized?!'];
   }
 }

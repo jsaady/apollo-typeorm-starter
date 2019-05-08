@@ -7,10 +7,12 @@ import { join } from 'path';
 import 'reflect-metadata';
 import { buildSchema, useContainer as gqlUseContainer } from 'type-graphql';
 import Container from 'typedi';
-import { createConnection, useContainer as ormUseContainer } from 'typeorm';
+import { useContainer as ormUseContainer } from 'typeorm';
+import { dbConnect } from './db-connect';
 import './logger';
+import { authChecker } from './middlewares/auth-checker';
 import { context } from './middlewares/auth-context';
-import { AuthResolver } from './resolvers/auth.resolver';
+import { resolvers } from './resolvers';
 
 (async () => {
   ormUseContainer(Container);
@@ -19,9 +21,10 @@ import { AuthResolver } from './resolvers/auth.resolver';
     schema
   ] = await Promise.all([
     buildSchema({
-      resolvers: [AuthResolver]
+      resolvers,
+      authChecker
     }),
-    createConnection()
+    dbConnect()
   ]);
   writeFileSync(join(__dirname, '..', 'schema.gql'), printSchema(schema, {
     commentDescriptions: true
