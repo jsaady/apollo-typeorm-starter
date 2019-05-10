@@ -15,7 +15,7 @@ export class RefreshToken {
   @Column()
   clientIdentifier: string;
 
-  @Column('timestamp')
+  @Column('datetime')
   expiration: Date;
 
   @CreateDateColumn()
