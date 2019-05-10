@@ -1,4 +1,4 @@
-import { Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Args, Ctx, Mutation, Resolver } from "type-graphql";
 import { LoginArgument } from "../../common/arguments/login.argument";
 import { LogoutArgument } from "../../common/arguments/logout.argument";
 import { RefreshArgument } from "../../common/arguments/refresh.argument";
@@ -70,7 +70,6 @@ export class AuthResolver {
         return result;
     }
   }
-
   @Mutation(returns => String)
   async logout (
     @Args() logoutInfo: LogoutArgument,
@@ -79,11 +78,5 @@ export class AuthResolver {
     await this.refreshTokenService.revoke(user.id, logoutInfo.clientIdentifier);
 
     return '';
-  }
-
-  @Query(returns => [String])
-  @Authorized(['asdfasdfasdf'])
-  something () {
-    return ['Authorized?!'];
   }
 }
