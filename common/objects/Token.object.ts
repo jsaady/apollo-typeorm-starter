@@ -1,4 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
+import { UserObject } from "./User.object";
 
 @ObjectType()
 export class TokenObject {
@@ -13,4 +14,7 @@ export class TokenObject {
 
   @Field(() => Date)
   refreshTokenExpiration: Date;
+
+  @Field(() => UserObject)
+  user: UserObject;
 }

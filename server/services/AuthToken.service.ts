@@ -3,11 +3,12 @@ import { sign } from 'jsonwebtoken';
 import { Service } from "typedi";
 import { Repository } from "typeorm";
 import { InjectRepository } from "typeorm-typedi-extensions";
+import { LoginErrors } from "../../common/enums/LoginErrors.enum";
+import { RefreshTokenErrors } from '../../common/enums/RefreshTokenErrors.enum';
+import { SignupErrors } from '../../common/enums/SignupErrors.enum';
 import { TokenObject } from "../../common/objects/Token.object";
+import { UserObject } from '../../common/objects/User.object';
 import { User } from "../entities/User.entity";
-import { LoginErrors } from "../enums/LoginErrors.enum";
-import { RefreshTokenErrors } from '../enums/RefreshTokenErrors.enum';
-import { SignupErrors } from '../enums/SignupErrors.enum';
 import { RefreshTokenService } from "./RefreshToken.service";
 
 @Service()
@@ -77,6 +78,13 @@ export class AuthTokenService {
   }
 
   private async userToTokenObject(user: User, clientIdentifier: string) {
+    const userObject: UserObject = {
+      username: user.email,
+      permissions: user.roles.reduce((acc, role) => ([
+        ...acc,
+        ...role.permissions.map(p => p.permission)
+      ]), [])
+    }
     const authTokenEntity = await this.userToJwt(user);
     const authToken = authTokenEntity.token;
     const authTokenExpiration = authTokenEntity.expiration;
@@ -87,7 +95,8 @@ export class AuthTokenService {
       authToken,
       authTokenExpiration,
       refreshToken,
-      refreshTokenExpiration
+      refreshTokenExpiration,
+      user: userObject
     };
   }
 
@@ -95,12 +104,12 @@ export class AuthTokenService {
     user: User
   ) {
     return new Promise<{token: string; expiration: Date;}>((resolve, reject) => {
-      const expiration = new Date(Date.now() + 300);
-      const userWithoutPass = {
+      user = {
         ...user
-      };
-      delete userWithoutPass.password;
-      sign(userWithoutPass, 'thuper_thecret', {
+      } as User;
+      delete user.password;
+      const expiration = new Date(Date.now() + 300);
+      sign(user, 'thuper_thecret', {
         expiresIn: 300
       }, (error, token) => {
         if (error) {

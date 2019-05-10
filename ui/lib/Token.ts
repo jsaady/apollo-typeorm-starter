@@ -21,6 +21,10 @@ class TokenManager {
         refreshTokenExpiration
         authToken
         authTokenExpiration
+        user {
+          username
+          permissions
+        }
       }
     }
   `;
@@ -32,6 +36,10 @@ class TokenManager {
         refreshTokenExpiration
         authToken
         authTokenExpiration
+        user {
+          username
+          permissions
+        }
       }
     }
   `;
@@ -39,6 +47,12 @@ class TokenManager {
   private logout$ = gql`
     mutation DoLogout($clientIdentifier: String!) {
       logout(clientIdentifier: $clientIdentifier)
+    }
+  `;
+
+  private something$ = gql`
+    query DoSomething {
+      something
     }
   `;
 
@@ -152,6 +166,18 @@ class TokenManager {
       this.setTokenObject(null);
     } catch(e) {
       console.error(e);
+    }
+  }
+
+  async trySomething () {
+    try {
+      const result = await client.query<{ something: string[] }>({
+        query: this.something$
+      });
+
+      return result.data.something;
+    } catch {
+      return ['Unauthorized']
     }
   }
 }

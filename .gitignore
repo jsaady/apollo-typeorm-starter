@@ -5,3 +5,4 @@ dist
 schema.gql
 *.log
 **/.cache
+server/logs
