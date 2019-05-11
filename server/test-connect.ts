@@ -12,7 +12,6 @@ export const open = async () => {
     database: 'test'
   });
 
-  console.log(mappedOptions);
   connection = await createConnection(mappedOptions);
 
   await connection.runMigrations();
