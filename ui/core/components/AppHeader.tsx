@@ -15,7 +15,7 @@ const styles = {
   }
 };
 
-type AppHeaderProps = {
+export type AppHeaderProps = {
   classes: Record<keyof typeof styles, string>;
 } & RouteComponentProps;
 

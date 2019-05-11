@@ -140,7 +140,7 @@ function runTest (test: any, prop: string, arg: any, done?: any) {
   }
 }
 
-function runSuite(func: any, injector: Injector, type: TestTypes = TestTypes.ReactComponent) {
+function runSuite(func: any, injector: Injector, type: TestTypes = TestTypes.Service) {
   const configuredTests = Storage.get(func);
   describe(configuredTests.testTarget, () => {
     let arg: any;
@@ -153,7 +153,7 @@ function runSuite(func: any, injector: Injector, type: TestTypes = TestTypes.Rea
       }
       if (!isBeforeAll || configuredTests.beforeAll.some(hook => hook.includeArg)) {
         const TestTarget = configuredTests.testTarget;
-        arg = type === TestTypes.ReactComponent ?
+        arg = (type === TestTypes.ReactComponent) ?
           require('enzyme').shallow(require('react').createElement(TestTarget)) :
           injector.get(TestTarget);
       }

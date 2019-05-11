@@ -4,7 +4,7 @@ import { AfterAll, BeforeAll, Describe, DoneCallback, It, Spec } from "../../tes
 import { close, open } from '../test-connect';
 import { AuthTokenService } from "./AuthToken.service";
 
-@Describe(AuthTokenService, Container)
+@Describe(AuthTokenService, { injector: Container })
 export class AuthTokenServiceSpec implements Spec<AuthTokenServiceSpec, AuthTokenService> {
   @BeforeAll(false) async 'connect' (_: any, done: DoneCallback) {
     await open();
