@@ -4,10 +4,16 @@ import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOpti
 let connection: Connection;
 export const open = async () => {
   useContainer(Container);
-  connection = await createConnection(Object.assign<MysqlConnectionOptions, MysqlConnectionOptions>(require('./ormconfig.json')[0], {
+  const mySqlOptions: MysqlConnectionOptions = require('./ormconfig.json')[0];
+  const mappedOptions = Object.assign<MysqlConnectionOptions, MysqlConnectionOptions>(mySqlOptions, {
+    username: 'MYSQL_USERNAME' in process.env ? process.env.MYSQL_USERNAME || undefined : mySqlOptions.username,
+    password: 'MYSQL_PASSWORD' in process.env ? process.env.MYSQL_PASSWORD || undefined : mySqlOptions.password,
     type: 'mysql',
     database: 'test'
-  }));
+  });
+
+  console.log(mappedOptions);
+  connection = await createConnection(mappedOptions);
 
   await connection.runMigrations();
 };

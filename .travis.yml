@@ -1,0 +1,21 @@
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+env:
+  - MYSQL_USERNAME=root
+  - MYSQL_PASSWORD=''
+language: node_js
+node_js:
+  - "8"
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+cache:
+  directories:
+    - "node_modules"
+script:
+  - yarn run test

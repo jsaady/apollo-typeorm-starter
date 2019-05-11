@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "server": "yarn workspace @streamer/server",
-    "ui": "yarn workspace @streamer/ui"
+    "ui": "yarn workspace @streamer/ui",
+    "test": "yarn server test"
   }
 }
