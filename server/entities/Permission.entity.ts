@@ -4,10 +4,6 @@ import { BaseEntity } from "./Base";
 
 @Entity()
 export class Permission extends BaseEntity {
-  @Column({
-    type: 'enum',
-    enum: Permissions,
-    unique: true
-  })
+  @Column()
   permission: Permissions;
 }
