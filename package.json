@@ -8,7 +8,6 @@
   "scripts": {
     "server": "yarn workspace @streamer/server",
     "ui": "yarn workspace @streamer/ui",
-    "test": "yarn server test",
-    "posttest": "yarn ui test"
+    "test": "jest --runInBand"
   }
 }
