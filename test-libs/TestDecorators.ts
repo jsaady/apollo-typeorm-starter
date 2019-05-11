@@ -1,3 +1,4 @@
+
 declare var describe: any;
 declare var it: any;
 declare var beforeAll: any;
@@ -7,10 +8,7 @@ declare var afterAll: any;
 type Type<T> = { new(...args: any[]): T };
 type Injector = { get: <T1>(target: Type<T1>) => T1 };
 export type DoneCallback = () => void;
-export enum TestTypes {
-  Component,
-  Service
-}
+
 interface TestMetadata {
   attr: string;
   testName: string;
@@ -104,8 +102,11 @@ export function TestCase (testName?: string) {
     return desc;
   };
 }
-
-export function Describe<T, P extends Spec<P, T>>(testTarget: Type<T>&Function, injector: Injector) {
+export enum TestTypes {
+  Service,
+  ReactComponent
+}
+export function Describe<T, P extends Spec<P, T>>(testTarget: any, conf: { injector: Injector; type?: TestTypes }) {
   return (target: Type<P>) => {
     let storage = getOrDefault(target);
     storage = {
@@ -113,12 +114,20 @@ export function Describe<T, P extends Spec<P, T>>(testTarget: Type<T>&Function, 
       testTarget
     };
     Storage.set(target, storage);
-    runSuite(target as any, injector);
+
+    if (conf.type === TestTypes.ReactComponent) {
+      const enzyme = require("enzyme");
+      const Adapter = require("enzyme-adapter-react-16");
+
+      enzyme.configure({ adapter: new Adapter() });
+    }
+
+    runSuite(target as any, conf.injector, conf.type);
   };
 }
 
-export function TestSuite<T>(config: {target: Type<T>; injector: Injector}) {
-  return Describe(config.target, config.injector);
+export function TestSuite<T>(config: { target: Type<T>; injector: Injector; type?: TestTypes; }) {
+  return Describe(config.target, config);
 }
 
 function runTest (test: any, prop: string, arg: any, done?: any) {
@@ -131,17 +140,22 @@ function runTest (test: any, prop: string, arg: any, done?: any) {
   }
 }
 
-function runSuite(func: any, injector: Injector) {
+function runSuite(func: any, injector: Injector, type: TestTypes = TestTypes.ReactComponent) {
   const configuredTests = Storage.get(func);
   describe(configuredTests.testTarget, () => {
     let arg: any;
     let test: any;
     const prepArgs = (isBeforeAll: boolean) => () => {
       if (!test) {
-        test = injector.get(func);
+        test = type === TestTypes.Service ?
+          injector.get(func) :
+          new func();
       }
       if (!isBeforeAll || configuredTests.beforeAll.some(hook => hook.includeArg)) {
-        arg = injector.get(configuredTests.testTarget);
+        const TestTarget = configuredTests.testTarget;
+        arg = type === TestTypes.ReactComponent ?
+          require('enzyme').shallow(require('react').createElement(TestTarget)) :
+          injector.get(TestTarget);
       }
     };
 

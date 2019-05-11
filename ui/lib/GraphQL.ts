@@ -1,8 +1,11 @@
 import ApolloClient from 'apollo-boost';
+import unfetch from 'unfetch';
 import { tokenManager } from './Token';
+
 export const localStorageKey = 'TOKEN';
 export const client = new ApolloClient({
   uri: 'http://localhost:4000',
+  fetch: unfetch,
   request: async (config) => {
     const isRefreshing = config.operationName.toLowerCase().includes('refresh');
     if (tokenManager.loggedIn() && !isRefreshing) {

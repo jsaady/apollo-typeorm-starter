@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "test": "jest --runInBand",
     "build": "parcel ./index.html",
     "watch": "nodemon -e yarn build",
     "do-ts": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' node -r ts-node/register"
@@ -11,15 +12,21 @@
   "dependencies": {
     "@material-ui/core": "^3.8.1",
     "@playlyfe/gql": "^2.6.1",
+    "@types/enzyme": "^3.9.1",
+    "@types/jest": "^24.0.12",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/react-router": "^4.4.3",
     "@types/react-router-dom": "^4.3.1",
     "apollo-boost": "^0.1.23",
+    "chai": "^4.2.0",
     "class-transformer": "^0.2.0",
     "cross-env": "^5.2.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
+    "jest": "^24.8.0",
     "parcel-bundler": "^1.12.3",
     "react": "^16.7.0",
     "react-apollo": "^2.3.3",
@@ -27,9 +34,11 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "rxjs": "^6.5.1",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
     "ts-node": "^7.0.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "unfetch": "^4.1.0"
   },
   "devDependencies": {
     "sass": "^1.20.1"

@@ -19,7 +19,7 @@ type AppHeaderProps = {
   classes: Record<keyof typeof styles, string>;
 } & RouteComponentProps;
 
-const AppHeaderComp: FunctionComponent<AppHeaderProps> = ({ classes, history }) => (
+export const AppHeaderComp: FunctionComponent<AppHeaderProps> = ({ classes, history }) => (
   <div className={classes.root}>
     <AppBar position="static">
       <Toolbar>
