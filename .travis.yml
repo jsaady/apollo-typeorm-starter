@@ -5,8 +5,7 @@ addons:
     packages:
       - mysql-server
 env:
-  - MYSQL_USERNAME=root
-  - MYSQL_PASSWORD=''
+  - MYSQL_USERNAME=root MYSQL_PASSWORD=''
 language: node_js
 node_js:
   - "8"
