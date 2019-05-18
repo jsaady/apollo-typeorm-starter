@@ -13,5 +13,7 @@ describe('server', () => {
 
     expect(compErr).toBeNull();
     expect(server).toBeInstanceOf(ApolloServer);
+
+    done();
   });
 });
