@@ -1,6 +1,10 @@
 import Container from "typedi";
 import { Connection, createConnection, useContainer } from "typeorm";
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
+import { Permission } from './entities/Permission.entity';
+import { RefreshToken } from './entities/RefreshToken.entity';
+import { Role } from './entities/Role.entity';
+import { User } from './entities/User.entity';
 let connection: Connection;
 export const open = async () => {
   useContainer(Container);
@@ -9,7 +13,13 @@ export const open = async () => {
     username: 'MYSQL_USERNAME' in process.env ? process.env.MYSQL_USERNAME || undefined : mySqlOptions.username,
     password: 'MYSQL_PASSWORD' in process.env ? process.env.MYSQL_PASSWORD || undefined : mySqlOptions.password,
     type: 'mysql',
-    database: 'test'
+    database: 'test',
+    entities: [
+      Permission,
+      RefreshToken,
+      Role,
+      User
+    ]
   });
 
   connection = await createConnection(mappedOptions);
