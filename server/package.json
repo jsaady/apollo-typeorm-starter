@@ -6,7 +6,7 @@
    "scripts": {
       "test": "jest --runInBand",
       "start": "cross-env TS_NODE_PROJECT=./tsconfig.app.json node -r ts-node/register ./index.ts",
-      "watch": "nodemon --watch './**/*' --exec yarn start",
+      "watch": "nodemon -e \"ts\" -w . --exec yarn start",
       "build": "tsc -p ./tsconfig.app.json",
       "orm": "cross-env APP_ROOT_PATH='.' TS_NODE_PROJECT=./tsconfig.app.json node -r ts-node/register ../node_modules/typeorm/cli.js"
    },
