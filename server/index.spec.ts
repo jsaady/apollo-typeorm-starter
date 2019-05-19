@@ -1,5 +1,5 @@
-import { ApolloServer } from 'apollo-server';
 import { buildAppSchema } from './buildAppSchema';
+import express = require('express');
 
 describe('server', () => {
   it('should be able to compile', async (done) => {
@@ -12,7 +12,8 @@ describe('server', () => {
     }
 
     expect(compErr).toBeNull();
-    expect(server).toBeInstanceOf(ApolloServer);
+    expect(server).toHaveProperty('_router');
+    expect(server).toHaveProperty('listen');
 
     done();
   });

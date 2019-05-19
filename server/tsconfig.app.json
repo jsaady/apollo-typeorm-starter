@@ -1,7 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "include": [
-    "../common/*"
+    "../common/*",
+    "./*.ts",
+    "./ormconfig.json"
+  ],
+  "exclude": [
+    "*.spec.ts"
   ],
   "compilerOptions": {
     "outDir": "../dist",

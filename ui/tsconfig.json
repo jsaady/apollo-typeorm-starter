@@ -4,7 +4,7 @@
     "../common/**/*"
   ],
   "compilerOptions": {
-    "outDir": "../assets",
+    "outDir": "../dist/assets",
     "moduleResolution": "node",
     "removeComments": false,
     "jsx": "react",
