@@ -34,7 +34,8 @@ export async function buildAppSchema() {
     cors: {
       origin: '*'
     },
-    app
+    app,
+    path: '/graphql'
   });
 
   return app;

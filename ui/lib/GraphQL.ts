@@ -2,9 +2,8 @@ import ApolloClient from 'apollo-boost';
 import unfetch from 'unfetch';
 import { tokenManager } from './Token';
 
-export const localStorageKey = 'TOKEN';
 export const client = new ApolloClient({
-  uri: 'http://localhost:8080',
+  uri: '/graphql',
   fetch: unfetch,
   request: async (config) => {
     const isRefreshing = config.operationName.toLowerCase().includes('refresh');
