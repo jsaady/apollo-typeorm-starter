@@ -8,6 +8,8 @@
   "scripts": {
     "server": "yarn workspace @streamer/server",
     "ui": "yarn workspace @streamer/ui",
+    "build": "docker build -t apollo-typeorm-starter .",
+    "start": "yarn server start",
     "test": "jest --runInBand"
   }
 }

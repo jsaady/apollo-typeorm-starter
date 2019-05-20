@@ -9,6 +9,7 @@ export function dbConnect (connectionIndex = 0) {
   
   return createConnection({
     ...config[connectionIndex],
+    migrations: [],
     entities: [
       Permission,
       RefreshToken,

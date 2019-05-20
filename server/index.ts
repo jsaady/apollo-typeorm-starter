@@ -17,7 +17,8 @@ import './logger';
     buildAppSchema(),
     dbConnect()
   ]);
-  const result = await server.listen(4000);
-  console.log(`Listening: ${result.url}`);
+
+  const result = await server.listen(8080);
+  console.log(`Listening: ${result.address()}`);
 })();
 

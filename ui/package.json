@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --runInBand",
-    "build": "parcel ./index.html",
-    "watch": "nodemon -e yarn build",
+    "start": "parcel ./index.html",
+    "build": "parcel build ./index.html --out-dir=\"../dist/assets/\"",
     "do-ts": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' node -r ts-node/register"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "apollo-boost": "^0.1.23",
     "chai": "^4.2.0",
     "class-transformer": "^0.2.0",
+    "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
@@ -34,6 +35,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "rxjs": "^6.5.1",
+    "surge": "^0.20.5",
     "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
     "ts-node": "^7.0.1",
