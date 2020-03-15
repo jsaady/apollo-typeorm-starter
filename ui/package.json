@@ -43,7 +43,7 @@
     "unfetch": "^4.1.0"
   },
   "devDependencies": {
-    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "sass": "^1.20.1"
   },
   "alias": {
