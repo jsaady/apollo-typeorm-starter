@@ -8,7 +8,7 @@ env:
   - MYSQL_USERNAME=root MYSQL_PASSWORD=''
 language: node_js
 node_js:
-  - "8"
+  - "10"
 services:
   - mysql
 before_install:
