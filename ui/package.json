@@ -27,7 +27,7 @@
     "enzyme-adapter-react-16": "^1.12.1",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
-    "jest": "^24.8.0",
+    "jest": "^25.1.0",
     "parcel-bundler": "^1.12.3",
     "react": "^16.13.0",
     "react-apollo": "^2.3.3",
