@@ -24,7 +24,7 @@
       "axios": "^0.18.1",
       "bcrypt": "^3.0.3",
       "chai": "^4.2.0",
-      "class-transformer": "^0.2.0",
+      "class-transformer": "^0.3.1",
       "concurrently": "^5.1.0",
       "cross-env": "^7.0.0",
       "express": "^4.17.0",
