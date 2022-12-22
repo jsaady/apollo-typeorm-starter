@@ -31,7 +31,7 @@
       "express-history-api-fallback": "^2.2.1",
       "graphql": "^14.0.2",
       "jest": "^25.1.0",
-      "jsonwebtoken": "^8.4.0",
+      "jsonwebtoken": "^9.0.0",
       "mysql": "^2.16.0",
       "reflect-metadata": "^0.1.10",
       "source-map-url": "^0.4.0",
